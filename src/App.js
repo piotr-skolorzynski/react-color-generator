@@ -11,15 +11,14 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-
     try {
       //wykorzystanie biblioteki do generowania odcieni danego koloru, przeczytaj dokumentację dla szczegółów
       let colors = new Values(color).all(10);
+      setList(colors);
     } catch (error) {
       setIsError(true);
       console.log(error);
     }
-
   }
 
   return (
@@ -38,7 +37,13 @@ function App() {
         </form>
     </section>
     <section className="colors">
-      <h4>list goes here</h4>
+      {
+        list.map((color, index) => {
+          return (
+            <SingleColor key={index} {...color} index={index} />
+          )
+        })
+      }
     </section>
     </>
   );
