@@ -11,7 +11,15 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('submit');
+
+    try {
+      //wykorzystanie biblioteki do generowania odcieni danego koloru, przeczytaj dokumentację dla szczegółów
+      let colors = new Values(color).all(10);
+    } catch (error) {
+      setIsError(true);
+      console.log(error);
+    }
+
   }
 
   return (
@@ -19,7 +27,13 @@ function App() {
     <section className="container">
         <h3>color generator</h3>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={color} placeholder="#f15025" onChange={e => setColor(e.target.value)} />
+          <input
+            type="text"
+            value={color}
+            placeholder="#f15025"
+            onChange={e => setColor(e.target.value)}
+            className={`${isError ? 'error' : null}`}
+          />
           <button type="submit" className="btn">generate</button>
         </form>
     </section>
